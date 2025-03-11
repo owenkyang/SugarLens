@@ -29,7 +29,7 @@ hr {
 .plate-image {
     display: block;
     margin: 20px auto;
-    max-width: 70%;
+    max-width: 60%;
     height: auto;
 }
 
@@ -45,6 +45,8 @@ hr {
     right: 38%;
     width: 12%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .avocado-image {
@@ -53,6 +55,8 @@ hr {
     left: 30%;
     width: 18%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .milk-image {
@@ -61,6 +65,8 @@ hr {
     left: 78%;
     width: 17%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .blueberries-image {
@@ -69,6 +75,8 @@ hr {
     left: 45%;
     width: 13%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .orangejuice-image {
@@ -77,6 +85,8 @@ hr {
     left: 67%;
     width: 17%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .toast-image {
@@ -85,6 +95,8 @@ hr {
     left: 25%;
     width: 22%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .chicken-image {
@@ -94,6 +106,8 @@ hr {
     width: 20%;
     height: auto;
     transform: rotate(30deg);
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .spinach-image {
@@ -103,6 +117,8 @@ hr {
     width: 16%;
     height: auto;
     transform: rotate(-60deg);
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
 }
 
 .potatoes-image {
@@ -111,4 +127,18 @@ hr {
     left: 55%;
     width: 15%;
     height: auto;
+    transition: box-shadow 0.3s ease;
+    border-radius: 50%;
+}
+
+.peanutbutter-image:hover,
+.avocado-image:hover,
+.milk-image:hover,
+.blueberries-image:hover,
+.orangejuice-image:hover,
+.toast-image:hover,
+.chicken-image:hover,
+.spinach-image:hover,
+.potatoes-image:hover {
+    box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.7);
 }
