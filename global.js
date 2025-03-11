@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     tooltip.style.display = 'none';
     document.body.appendChild(tooltip);
 
+    const foodTitle = document.createElement('div');
+    foodTitle.classList.add('food-title');
+    foodTitle.style.display = 'none';
+    document.body.appendChild(foodTitle);
+
     let lastFoodInfo = null;
 
     d3.csv('data/macros.csv').then(data => {
@@ -18,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     lastFoodInfo = { ...foodInfo, name: foodName };
                     updateTooltip(lastFoodInfo);
                     tooltip.style.display = 'block';
+                    foodTitle.style.display = 'block';
+                    foodTitle.innerHTML = foodName;
                 }
             });
 
@@ -27,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+
+        // Set the tooltip position once, based on the plate image
     });
 
     function processData(data) {
@@ -49,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTooltip(foodInfo) {
         tooltip.innerHTML = `
-            <h2>${foodInfo.name}</h2>
             <h2>NUTRITION FACTS</h2>
             <hr class="thick-line">
             <div class="nf-row">
