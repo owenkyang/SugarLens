@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   graphsContainer.style.opacity = '0';
   graphsContainer.style.transition = 'opacity 1s ease-in-out';
 
+  const graphsTitle = document.getElementById('graphs-title');
+
   const buttonsContainer = document.createElement('div');
   buttonsContainer.id = 'buttons-container';
   buttonsContainer.style.position = 'absolute';
@@ -69,8 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   createLineGraph(foodData, food);
               });
               graphsContainer.style.display = 'block';
+              graphsTitle.style.display = 'block'; // Show the title
               setTimeout(() => {
                   graphsContainer.style.opacity = '1';
+                  graphsTitle.style.opacity = '1'; // Fade in the title
                   window.scrollTo({
                       top: graphsContainer.offsetTop,
                       behavior: 'smooth'
@@ -79,8 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       } else {
           graphsContainer.style.display = 'block';
+          graphsTitle.style.display = 'block'; // Show the title
           setTimeout(() => {
               graphsContainer.style.opacity = '1';
+              graphsTitle.style.opacity = '1'; // Fade in the title
               window.scrollTo({
                   top: graphsContainer.offsetTop,
                   behavior: 'smooth'
