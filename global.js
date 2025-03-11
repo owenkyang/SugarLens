@@ -86,3 +86,55 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const goodFoods = ['peanut butter', 'chicken breast', 'avocado', 'spinach'];
+    const badFoods = ['orange juice', 'blueberry', 'toast', '2% milk', 'potatoes'];
+    const maxSelections = 4;
+    let selectedFoods = [];
+    const foodImages = document.querySelectorAll('.peanutbutter-image, .avocado-image, .milk-image, .blueberries-image, .orangejuice-image, .toast-image, .chicken-image, .spinach-image, .potatoes-image');
+    foodImages.forEach(img => {
+      img.addEventListener('click', () => {
+        if (img.classList.contains('selected')) {
+          img.classList.remove('selected');
+          selectedFoods = selectedFoods.filter(el => el !== img);
+        } else {
+          if (selectedFoods.length < maxSelections) {
+            img.classList.add('selected');
+            selectedFoods.push(img);
+          } else {
+            alert(`You can only select ${maxSelections} foods.`);
+          }
+        }
+      });
+    });
+    function createSubmitButton() {
+      let btn = document.createElement('button');
+      btn.id = 'submit-btn';
+      btn.textContent = 'Submit';
+      const imageContainer = document.querySelector('.image-container');
+      if (imageContainer && imageContainer.parentNode) {
+        imageContainer.parentNode.insertBefore(btn, imageContainer.nextSibling);
+      } else {
+        document.body.appendChild(btn);
+      }
+      btn.addEventListener('click', handleSubmit);
+    }
+    function handleSubmit() {
+      if (selectedFoods.length !== maxSelections) {
+        alert(`Please select exactly ${maxSelections} foods.`);
+        return;
+      }
+      selectedFoods.forEach(img => {
+        const foodName = img.alt.toLowerCase();
+        if (goodFoods.includes(foodName)) {
+          img.style.boxShadow = '0 0 10px 5px green';
+        } else if (badFoods.includes(foodName)) {
+          img.style.boxShadow = '0 0 10px 5px red';
+        } else {
+          img.style.boxShadow = '0 0 10px 5px gray';
+        }
+      });
+    }
+    createSubmitButton();
+});
