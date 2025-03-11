@@ -1,0 +1,23 @@
+Date,Time,logged_food,searched_food,amount,unit,calorie,total_carb,sugar,protein,Person
+2020-03-02,8:15:00,Peach,,1,,68,17,15,1.6,4
+2020-02-14,19:30:00,Acai Smoothie,Acai Smoothie,20,fluid ounce,440,92,75,5,1
+2020-02-19,20:00:00,Chicken and Rice,Chicken and Rice,2,cup,532,22,1,67,1
+2020-03-02,8:15:00,Banana,Banana,1,,105,27,14,1.3,4
+2020-02-21,12:30:00,Pita Bread,Small pita Bread,7,,539,109,2.5,18,1
+2020-03-02,12:30:00,Squash,Squash,1,,41,6.8,4.5,1.9,4
+2020-03-22,21:30:00,2% Milk,2% Milk,8,fluid ounce,122,12,12,8.1,9
+2020-03-23,17:30:00,Peanut Butter,Peanut Butter,,,188,7.7,2.1,7,9
+2020-03-25,8:10:00,Avocado,Avocado,0.5,,161,8.6,0.7,2,9
+2020-03-22,15:15:00,Blueberrry,Blueberry,12,,9.3,2.4,1.6,0.1,9
+2020-03-28,19:15:00,Orange Juice,Orange Juice,8,ounce,110,26,22,2,9
+2020-03-21,13:15:00,Chicken Breast,Chicken Breast,0.5,,71,0,0,13,9
+2020-03-27,12:00:00,Salmon,,3,ounce,81,1.5,0.7,8.8,9
+2020-03-14,17:55:00,Potatoes,,0.5,,80,18,1,2.2,8
+2020-02-29,23:30:00,Fruit Smoothie,Fruit Smoothie,30,fluid oz,606,126,90,21,6
+2020-04-08,8:00:00,Toast,Toast,3,slice,192,36,4.2,6,11
+2020-02-28,19:30:00,Banana Bread,Slice of Banana Bread,2,,362,58,28,5.5,5
+2020-03-02,18:00:00,Salad,,13,ounce,87,18,7.9,5.3,5
+2020-03-06,18:15:00,Breakfast Bar,,,,130,25,13,2,6
+2020-06-08,19:40:00,Protein Powder,,1,scoop,113,2,0,25,14
+2020-03-28,8:40:00,Cereal,,0.5,cup,72,16,3.2,4.8,10
+2020-03-05,20:00:00,Spinach,Spinach,,,41,6.8,0.8,5.3,4
