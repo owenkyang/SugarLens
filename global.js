@@ -226,24 +226,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         svg.append("g")
             .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x).ticks(2).tickFormat(d3.timeFormat("%H:%M")).tickValues([d3.min(data, d => new Date(d.Date)), d3.max(data, d => new Date(d.Date))]));
 
         const y = d3.scaleLinear()
             .domain([d3.min(data, d => +d['Glucose Value']), d3.max(data, d => +d['Glucose Value'])])
             .range([height, 0]);
 
         svg.append("g")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(y).ticks(2).tickValues([d3.min(data, d => +d['Glucose Value']), d3.max(data, d => +d['Glucose Value'])]));
 
-        svg.append("path")
+        const line = d3.line()
+            .x(d => x(new Date(d.Date)))
+            .y(d => y(+d['Glucose Value']));
+
+        const path = svg.append("path")
             .datum(data)
             .attr("fill", "none")
-            .attr("stroke", "steelblue")
-            .attr("stroke-width", 1.5)
-            .attr("d", d3.line()
-                .x(d => x(new Date(d.Date)))
-                .y(d => y(+d['Glucose Value']))
-            );
+            .attr("stroke-width", 3) // Thicker line
+            .attr("d", line);
+
+        // Set line color based on food type
+        if (goodFoods.includes(food)) {
+            path.attr("stroke", "green");
+        } else if (badFoods.includes(food)) {
+            path.attr("stroke", "red");
+        } else {
+            path.attr("stroke", "gray");
+        }
 
         svg.append("text")
             .attr("x", width / 2)
@@ -251,5 +260,79 @@ document.addEventListener('DOMContentLoaded', () => {
             .attr("text-anchor", "middle")
             .attr("class", "graph-title")
             .text(`Glucose Levels for ${food.charAt(0).toUpperCase() + food.slice(1)}`);
+
+        // Display the minimum and maximum values on the y-axis
+        svg.append("text")
+            .attr("x", -margin.left)
+            .attr("y", y(d3.min(data, d => +d['Glucose Value'])))
+            .attr("dy", "-0.5em")
+            .attr("text-anchor", "end")
+            .style("font-size", "10px")
+            .text(d3.min(data, d => +d['Glucose Value']));
+
+        svg.append("text")
+            .attr("x", -margin.left)
+            .attr("y", y(d3.max(data, d => +d['Glucose Value'])))
+            .attr("dy", "-0.5em")
+            .attr("text-anchor", "end")
+            .style("font-size", "10px")
+            .text(d3.max(data, d => +d['Glucose Value']));
+
+        // Display the earliest and latest times on the x-axis
+        svg.append("text")
+            .attr("x", x(d3.min(data, d => new Date(d.Date))))
+            .attr("y", height + margin.bottom / 2)
+            .attr("dy", "1em")
+            .attr("text-anchor", "middle")
+            .style("font-size", "10px")
+
+
+        svg.append("text")
+            .attr("x", x(d3.max(data, d => new Date(d.Date))))
+            .attr("y", height + margin.bottom / 2)
+            .attr("dy", "1em")
+            .attr("text-anchor", "middle")
+            .style("font-size", "10px")
+
+        // Add tooltip
+        const graphTooltip = d3.select("body").append("div")
+            .attr("class", "graph-tooltip")
+            .style("opacity", 0);
+
+        const focus = svg.append("g")
+            .style("display", "none");
+
+        focus.append("circle")
+            .attr("r", 5)
+            .attr("fill", "black");
+
+        svg.append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+            .style("pointer-events", "all")
+            .on("mouseover", () => {
+                focus.style("display", null);
+                graphTooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+            })
+            .on("mousemove", (event) => {
+                const mouse = d3.pointer(event);
+                const xDate = x.invert(mouse[0]);
+                const closestData = data.reduce((prev, curr) => {
+                    return (Math.abs(new Date(curr.Date) - xDate) < Math.abs(new Date(prev.Date) - xDate) ? curr : prev);
+                });
+                focus.attr("transform", `translate(${x(new Date(closestData.Date))},${y(+closestData['Glucose Value'])})`);
+                graphTooltip.html(`Time: ${d3.timeFormat("%H:%M")(new Date(closestData.Date))}<br>Glucose: ${closestData['Glucose Value']}`)
+                    .style("left", (event.pageX + 5) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", () => {
+                focus.style("display", "none");
+                graphTooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
     }
 });
