@@ -149,6 +149,7 @@ hr {
 .spinach-image:hover,
 .potatoes-image:hover {
     box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.7);
+    cursor: pointer;
 }
 
 .nutrition-facts {
@@ -162,6 +163,8 @@ hr {
     top: 915px;
     left: 60px;
     z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .nutrition-facts h2 {
@@ -216,21 +219,128 @@ hr {
     top: 870px;
     left: 60px;
     z-index: 1000;
-}
-.selected {
-    border: 3px solid #333;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-#submit-btn, #learn-btn, #clear-catch-btn {
+.selected {
+    border: 3px solid #333;
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+#submit-btn{
     font-size: 24px;
     padding: 12px 24px;
     margin: 20px auto;
     display: block;
     cursor: pointer;
+
 }
- #graphs-container {
-    width: 100%;
-    max-width: 800px;
+
+#refresh-btn {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    padding: 12px 24px;
     margin: 20px auto;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    bottom: 430px;
+    right: 629px;
+    align-items: center;
+    appearance: none;
+    background-color: #fff;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #333;
+    display: inline-flex;
+    fill: currentcolor;
+    font-weight: 500;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
     text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform,opacity;
+    z-index: 0;
+}
+
+#refresh-btn:hover {
+    background: #F6F9FE;
+    color: #3e434b;
+}
+
+#refresh-btn:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+}
+
+#refresh-btn:focus {
+    outline: none;
+    border: 2px solid #4285f4;
+}
+
+#refresh-btn:not(:disabled) {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+#refresh-btn:not(:disabled):hover {
+    box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+
+#refresh-btn:not(:disabled):focus {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+#refresh-btn:not(:disabled):active {
+    box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+#refresh-btn:disabled {
+    box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+#score-display {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    position: relative;
+    bottom: 430px;
+    right: 629px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+ #graphs-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    padding-left: 100px;/* Move graphs towards the left */
+}
+
+.graph-title {
+    font-size: 16px;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+#score-display {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
 }
