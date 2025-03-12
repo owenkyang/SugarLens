@@ -1,3 +1,5 @@
+// TODO: show two exampels of what a good glucose spike is and what a bad glucose spike it
+// TODO: make the webpage more modular looking. Have different colors for the different sections
 document.addEventListener('DOMContentLoaded', () => {
   const foodImages = document.querySelectorAll('.image-container img:not(.plate-image)');
   const tooltip = document.createElement('div');
