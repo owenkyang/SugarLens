@@ -260,8 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!scoreDisplay) {
           scoreDisplay = document.createElement('div');
           scoreDisplay.id = 'score-display';
+          scoreDisplay.style.display = 'block';
           scoreDisplay.style.textAlign = 'center';
-          scoreDisplay.style.fontSize = '24px';
+          scoreDisplay.style.fontSize = '22px';
           scoreDisplay.style.marginTop = '20px';
           scoreDisplay.style.opacity = '0';
           scoreDisplay.style.transition = 'opacity 0.5s ease-in-out';
