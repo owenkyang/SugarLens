@@ -452,10 +452,3 @@ hr {
     pointer-events: none;
 }
 
-#buttons-container {
-    position: absolute;
-    top: 1000px; /* Adjust position as needed */
-    left: 500px;
-    transform: translateX(-50%);
-    z-index: 1000;
-}
