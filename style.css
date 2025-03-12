@@ -43,15 +43,8 @@ hr {
 
 .image-container {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: inline-block;
     margin-top: 0px;
-}
-
-.image-container img {
-    max-width: 100%;
-    height: auto;
 }
 
 .peanutbutter-image {
@@ -447,68 +440,4 @@ hr {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-}
-
-@media (max-width: 768px) {
-    .main-title {
-        font-size: 48px;
-    }
-
-    .selection-title {
-        font-size: 28px;
-    }
-
-    .description {
-        font-size: 16px;
-    }
-
-    .image-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .image-container img {
-        width: 80%;
-        margin: 10px 0;
-    }
-
-    #graphs-container {
-        padding-left: 20px; /* Adjust padding for smaller screens */
-    }
-
-    #graphs-container svg {
-        width: 100%;
-        height: auto;
-    }
-
-    #buttons-container {
-        top: 1200px; /* Adjust position for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .main-title {
-        font-size: 36px;
-    }
-
-    .selection-title {
-        font-size: 24px;
-    }
-
-    .description {
-        font-size: 14px;
-    }
-
-    .image-container img {
-        width: 100%;
-        margin: 5px 0;
-    }
-
-    #graphs-container {
-        padding-left: 10px; /* Adjust padding for smaller screens */
-    }
-
-    #buttons-container {
-        top: 1400px; /* Adjust position for smaller screens */
-    }
 }
