@@ -405,7 +405,8 @@ hr {
     width: 100%;
     max-width: 1200px;
     text-align: center;
-    padding-left: 200px; /* Move graphs towards the left */
+    margin: 0 auto;
+    
     grid-auto-rows: minmax(250px, auto); /* Ensure rows adjust to graph height */
 }
 
@@ -413,6 +414,23 @@ hr {
     font-size: 16px;
     text-decoration: underline;
     margin-bottom: 10px;
+    white-space: nowrap; /* Ensure the title does not wrap */
+    overflow: visible; /* Ensure the title is fully visible */
+    text-overflow: ellipsis; /* Add ellipsis if the title is too long */
+}
+
+.graph-section-title {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.graph-section-description {
+    text-align: center;
+    font-size: 16px;
+    margin: 10px 0 20px 0;
+    color: #666;
 }
 
 #score-display {

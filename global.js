@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
   graphsContainer.style.transition = 'opacity 1s ease-in-out';
 
   const graphsTitle = document.getElementById('graphs-title');
+  const graphsDescription = document.getElementById('graphs-description');
+  const goodFoodsTitle = document.getElementById('good-foods-title');
+  const goodFoodsDescription = document.getElementById('good-foods-description');
+  const badFoodsTitle = document.getElementById('bad-foods-title');
+  const badFoodsDescription = document.getElementById('bad-foods-description');
 
   const buttonsContainer = document.createElement('div');
   buttonsContainer.id = 'buttons-container';
@@ -72,15 +77,35 @@ document.addEventListener('DOMContentLoaded', () => {
           const badFoods = ['blueberry', 'orange juice', '2% milk', 'toast', 'potatoes'];
           const foods = [...goodFoods, ...badFoods];
           d3.csv('data/glucose.csv').then(data => {
-              foods.forEach(food => {
+              // Show titles and descriptions
+              graphsTitle.style.display = 'block';
+              graphsDescription.style.display = 'block';
+              goodFoodsTitle.style.display = 'block';
+              goodFoodsDescription.style.display = 'block';
+              badFoodsTitle.style.display = 'block';
+              badFoodsDescription.style.display = 'block';
+
+              // Append good foods title and description
+              graphsContainer.appendChild(goodFoodsTitle);
+              graphsContainer.appendChild(goodFoodsDescription);
+
+              goodFoods.forEach(food => {
                   const foodData = data.filter(d => d.Food.trim().toLowerCase() === food);
                   createLineGraph(foodData, food);
               });
+
+              // Append bad foods title and description
+              graphsContainer.appendChild(badFoodsTitle);
+              graphsContainer.appendChild(badFoodsDescription);
+
+              badFoods.forEach(food => {
+                  const foodData = data.filter(d => d.Food.trim().toLowerCase() === food);
+                  createLineGraph(foodData, food);
+              });
+
               graphsContainer.style.display = 'block';
-              graphsTitle.style.display = 'block'; // Show the title
               setTimeout(() => {
                   graphsContainer.style.opacity = '1';
-                  graphsTitle.style.opacity = '1'; // Fade in the title
                   window.scrollTo({
                       top: graphsContainer.offsetTop,
                       behavior: 'smooth'
@@ -98,6 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   behavior: 'smooth'
               });
           }, 0);
+
+          // Show titles and descriptions
+          goodFoodsTitle.style.display = 'block';
+          goodFoodsDescription.style.display = 'block';
+          badFoodsTitle.style.display = 'block';
+          badFoodsDescription.style.display = 'block';
+          graphsDescription.style.display = 'block';
       }
   });
 
@@ -333,10 +365,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       svg.append("text")
           .attr("x", width / 2)
-          .attr("y", -10)
+          .attr("y", 0) // Adjusted y position to ensure the title is fully visible
           .attr("text-anchor", "middle")
           .attr("class", "graph-title")
-          .text(`Glucose Levels for ${food.charAt(0).toUpperCase() + food.slice(1)}`);
+          .text(`${food.charAt(0).toUpperCase() + food.slice(1)}`);
 
       // Display the minimum and maximum values on the y-axis
       svg.append("text")
