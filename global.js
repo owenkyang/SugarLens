@@ -5,12 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
   tooltip.style.display = 'none';
   tooltip.style.opacity = '0';
   tooltip.style.transition = 'opacity 0.5s ease-in-out';
+  tooltip.style.left = '5%';
+  tooltip.style.position = 'absolute';
   document.body.appendChild(tooltip);
 
   const foodTitle = document.createElement('div');
   foodTitle.classList.add('food-title');
   foodTitle.style.display = 'none';
   foodTitle.style.opacity = '0';
+  foodTitle.style.left = '5%';
   foodTitle.style.transition = 'opacity 0.5s ease-in-out';
   document.body.appendChild(foodTitle);
 
@@ -25,9 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
   buttonsContainer.id = 'buttons-container';
   buttonsContainer.style.position = 'absolute';
   buttonsContainer.style.top = '1050px'; // Adjust position as needed
-  buttonsContainer.style.left = '50%';
+  buttonsContainer.style.left = '51%';
   buttonsContainer.style.transform = 'translateX(-50%)';
   buttonsContainer.style.zIndex = '1000';
+  buttonsContainer.style.width = '100%'; // Ensure it adjusts to the screen width
+  buttonsContainer.style.maxWidth = '1200px'; // Limit the maximum width
+  buttonsContainer.style.textAlign = 'center'; // Center the buttons
   document.body.appendChild(buttonsContainer);
 
   const learnMoreButton = document.createElement('button');
