@@ -1,6 +1,29 @@
 // TODO: show two exampels of what a good glucose spike is and what a bad glucose spike it
 // TODO: make the webpage more modular looking. Have different colors for the different sections
 document.addEventListener('DOMContentLoaded', () => {
+    // Intro screen functionality
+    const introSection = document.getElementById('intro-section');
+    const mainContent = document.getElementById('main-content');
+    const letsBegin = document.getElementById('lets-begin');
+
+    letsBegin.addEventListener('click', () => {
+        // Fade out intro section
+        introSection.style.transition = 'opacity 1s ease-out';
+        introSection.style.opacity = '0';
+        
+        // Show and fade in main content
+        mainContent.style.display = 'block';
+        setTimeout(() => {
+            mainContent.style.transition = 'opacity 1s ease-in';
+            mainContent.style.opacity = '1';
+        }, 100);
+
+        // Remove intro section after animation
+        setTimeout(() => {
+            introSection.style.display = 'none';
+        }, 1000);
+    });
+
     const foodImages = document.querySelectorAll('.image-container img:not(.plate-image)');
     const tooltip = document.createElement('div');
     tooltip.classList.add('nutrition-facts');
@@ -323,6 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
         foodImages.forEach(img => {
             img.classList.remove('selected');
             img.style.boxShadow = 'none';
+            img.style.transition = 'box-shadow 0.3s ease'; // Reset the transition
+            // Remove any inline styles that might interfere with hover
+            img.style.removeProperty('box-shadow');
         });
         selectedFoods = [];
         let scoreDisplay = document.getElementById('score-display');
