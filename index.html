@@ -10,17 +10,23 @@
 <body>
     <div>
         <h1 class="main-title">Should You Eat These Foods If You're Prediabetic?</h1>
-        <p class = "description">By Owen Yang, Berlen Zhang, Sohan Raval, Christian Guerra</p>
+        <p class="description">By Owen Yang, Berlen Zhang, Sohan Raval, Christian Guerra</p>
         <hr>
-        <p class="description">Almost 98 million Americans (1/3 of all Americans) are prediabetic according to the 
-            <a href="https://www.cdc.gov/diabetes/communication-resources/1-in-3-americans.html" target="_blank">CDC</a>. 
-            Everyone knows that eating high sugary foods like cookies, ice cream, and drinking soda further detriments one's diabetic 
-            condition. But do you know about the seemingly healthy foods that spike your glucose levels and puts you at further risk
-            for Type II diabetes? Continue below to see if you are eating any of these common seemingly healthy foods and beverages that potentially put prediabetic individuals
-            at greater risk of Type II diabetes! (For Best Functionality, Please Switch Your Browser To Google Chrome!)</p>
+        <p class="description">
+            Almost 98 million Americans (1/3 of all Americans) are prediabetic according to the
+            <a href="https://www.cdc.gov/diabetes/communication-resources/1-in-3-americans.html" target="_blank">CDC</a>.
+            Everyone knows that eating high sugary foods like cookies, ice cream, and drinking soda further detriments one's diabetic
+            condition. But do you know about the seemingly healthy foods that spike your glucose levels and put you at further risk
+            for Type II diabetes? Continue below to see if you are eating any of these common seemingly healthy foods and beverages
+            that potentially put prediabetic individuals at greater risk of Type II diabetes!
+            (For Best Functionality, Please Switch Your Browser To Google Chrome!)
+        </p>
         <h2 class="selection-title">Please Select 4 Foods Or Drinks You Think Are Good For Prediabetics</h2>
-        <p class="description">The macronutrients data below is obtained from the food log of 16 prediabetic individuals 
-            from <a href="https://physionet.org/content/big-ideas-glycemic-wearable/1.1.2/" target="_blank">BIG IDEAs Lab Glycemic Variability and Wearable Device Dataset</a></p>
+        <p class="description">
+            The macronutrients data below is obtained from the food log of 16 prediabetic individuals
+            from <a href="https://physionet.org/content/big-ideas-glycemic-wearable/1.1.2/" target="_blank">
+            BIG IDEAs Lab Glycemic Variability and Wearable Device Dataset</a>
+        </p>
         <hr>
         <div class="image-container">
             <img src="assets/plate.png" alt="Plate" class="plate-image">
@@ -35,23 +41,57 @@
             <img src="assets/potatoes.png" alt="Potatoes" class="potatoes-image">
         </div>
     </div>
-    
-    <h2 id="graphs-title" class="selection-title" style="display: none;">How Much Your Glucose Spikes After Eating Each Food</h2>
+
+    <!-- Top-level heading and description for the graphs -->
+    <h2 id="graphs-title" class="selection-title" style="display: none;">
+        How Much Your Glucose Spikes After Eating Each Food
+    </h2>
     <p id="graphs-description" class="graph-section-description" style="display: none;">
-        The glucose and food data below is obtained from the food log and glucose logging data of 16 prediabetic individuals obtained
-        from <a href="https://physionet.org/content/big-ideas-glycemic-wearable/1.1.2/" target="_blank">BIG IDEAs Lab Glycemic Variability and Wearable Device Dataset</a>
+        The glucose and food data below is obtained from the food log and glucose logging data
+        of 16 prediabetic individuals obtained from
+        <a href="https://physionet.org/content/big-ideas-glycemic-wearable/1.1.2/" target="_blank">
+        BIG IDEAs Lab Glycemic Variability and Wearable Device Dataset</a>
     </p>
     <hr>
-    <div id="graphs-container" class="graphs-grid"></div>
-    
-    <h2 id="good-foods-title" class="graph-section-title" style="display: none;">Foods that do not spike Glucose</h2>
-    <p id="good-foods-description" class="graph-section-description" style="display: none;">This section lists foods that have a minimal impact on blood glucose levels, making them suitable for individuals 
-        managing diabetes or those looking to maintain stable blood sugar levels.</p>
-    
-    <h2 id="bad-foods-title" class="graph-section-title" style="display: none;">Foods that do spike Glucose</h2>
-    <p id="bad-foods-description" class="graph-section-description" style="display: none;">This section highlights foods that can cause a rapid increase in blood glucose levels. These foods are typically high in simple sugars or refined carbohydrates and should be consumed in moderation, 
-        especially by individuals monitoring their blood sugar.</p>
-    
+
+    <!-- Container to hold both "good" and "bad" sections side by side or stacked as needed -->
+    <div id="graphs-container">
+
+        <!-- GOOD FOODS SECTION -->
+        <div class="graph-section" id="good-foods-section" style="display: none;">
+            <!-- Left column: Title and description -->
+            <div class="text-container">
+                <h2 id="good-foods-title" class="graph-section-title">
+                    Foods that do not spike Glucose
+                </h2>
+                <p id="good-foods-description" class="graph-section-description-1">
+                    This section lists foods that have a minimal impact on blood glucose levels,
+                    making them suitable for individuals managing diabetes or those looking to
+                    maintain stable blood sugar levels.
+                </p>
+            </div>
+            <!-- Right column: Graphs -->
+            <div class="graphs-grid" id="good-foods-graphs"></div>
+        </div>
+
+        <!-- BAD FOODS SECTION -->
+        <div class="graph-section" id="bad-foods-section" style="display: none;">
+            <!-- Left column: Title and description -->
+            <div class="text-container">
+                <h2 id="bad-foods-title" class="graph-section-title">
+                    Foods that do spike Glucose
+                </h2>
+                <p id="bad-foods-description" class="graph-section-description-1">
+                    This section highlights foods that can cause a rapid increase in blood glucose levels.
+                    These foods are typically high in simple sugars or refined carbohydrates and should be
+                    consumed in moderation, especially by individuals monitoring their blood sugar.
+                </p>
+            </div>
+            <!-- Right column: Graphs -->
+            <div class="graphs-grid" id="bad-foods-graphs"></div>
+        </div>
+    </div>
+
     <script src="global.js"></script>
 </body>
 </html>

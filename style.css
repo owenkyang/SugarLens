@@ -398,18 +398,13 @@ hr {
     transition: opacity 0.5s ease-in-out;
 }
 
- #graphs-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Adjusted to fit more graphs per row */
+#graphs-container {
+    display: flex;        /* Now purely flex layout */
     gap: 20px;
     width: 100%;
     max-width: 1200px;
-    text-align: center;
     margin: 0 auto;
-    
-    grid-auto-rows: minmax(250px, auto); /* Ensure rows adjust to graph height */
-}
-
+  }
 .graph-title {
     font-size: 16px;
     text-decoration: underline;
@@ -432,6 +427,12 @@ hr {
     margin: 10px 0 20px 0;
     color: #666;
 }
+.graph-section-description-1 {
+    text-align: center;
+    font-size: 22px;
+    margin: 10px 0 20px 0;
+    color: #666;
+}
 
 #score-display {
     text-align: center;
@@ -450,5 +451,54 @@ hr {
     border: 0px;
     border-radius: 8px;
     pointer-events: none;
+}
+
+.graph-section {
+    display: flex;
+    flex-direction: row; /* Place title/description to the left, graphs on the right */
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  
+  .graph-section .text-container {
+    display: flex;
+    flex-direction: column !important; /* Stack the heading above the paragraph */
+    margin-right: 100px; /* Reduced margin to allow more space for text */
+    max-width: 800px; /* Increased max-width from 600px */
+    align-items: center; /* Center all items in the container */
+    text-align: center; /* Center the text content */
+    width: 100%; /* Ensure full width is used */
+}
+  
+.graph-section .text-container h2 {
+    width: 100%; /* Ensure the h2 uses full width of container */
+    text-align: center; /* Center the heading text */
+    margin-bottom: 20px; /* Add some space between title and description */
+}
+  
+  /* Let the .graphs-grid expand in the remaining space */
+  .graphs-grid {
+    flex: 1;
+    display: grid;
+    gap: 20px;
+    /* ...existing grid rules as needed... */
+  }
+
+#graphs-container .graphs-grid:nth-of-type(1) {
+    grid-template-columns: repeat(2, 1fr); /* 2 graphs per row for good foods */
+}
+#graphs-container .graphs-grid:nth-of-type(2) {
+    grid-template-columns: repeat(2, 1fr); /* 2 graphs per row for bad foods */
+}
+
+.potatoes-graph {
+    grid-column: span 2; /* Make the potatoes graph span 2 columns */
+    justify-self: center; /* Center the potatoes graph */
+}
+
+.food-section {
+    display: flex;
+    flex-direction: column;
+    
 }
 
