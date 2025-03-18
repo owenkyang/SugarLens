@@ -1,6 +1,48 @@
 // TODO: show two exampels of what a good glucose spike is and what a bad glucose spike it
 // TODO: make the webpage more modular looking. Have different colors for the different sections
 document.addEventListener('DOMContentLoaded', () => {
+    // Add back button handlers near the top
+    const backButtons = document.querySelectorAll('.back-button');
+    backButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const currentSection = button.parentElement;
+            if (currentSection.id === 'intermediate-section') {
+                // Clean up graphs before transitioning back
+                const salmonGraph = document.getElementById('salmon-graph');
+                const cerealGraph = document.getElementById('cereal-graph');
+                if (salmonGraph) salmonGraph.innerHTML = '';
+                if (cerealGraph) cerealGraph.innerHTML = '';
+                transitionToNext(intermediateSection, introSection);
+            } else if (currentSection.id === 'main-content') {
+                // Clean up UI elements before transitioning back
+                tooltip.style.display = 'none';
+                tooltip.style.opacity = '0';
+                foodTitle.style.display = 'none';
+                foodTitle.style.opacity = '0';
+                
+                // Reset buttons container
+                buttonsContainer.style.opacity = '0';
+                buttonsContainer.style.display = 'none';
+                
+                // Reset score and buttons
+                const scoreDisplay = document.getElementById('score-display');
+                if (scoreDisplay) {
+                    scoreDisplay.style.opacity = '0';
+                    scoreDisplay.style.display = 'none';
+                }
+                
+                // Reset selection state
+                selectedFoods = [];
+                foodImages.forEach(img => {
+                    img.classList.remove('selected');
+                    img.style.removeProperty('box-shadow');
+                });
+                
+                transitionToNext(mainContent, intermediateSection);
+            }
+        });
+    });
+
     // Intro screen functionality
     const introSection = document.getElementById('intro-section');
     const intermediateSection = document.getElementById('intermediate-section');
@@ -54,6 +96,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handler for play transition
     const handlePlayTransition = () => {
+        // Reset buttons container
+        buttonsContainer.style.display = 'block';
+        buttonsContainer.style.opacity = '1';
+        
+        // Show the buttons container at the correct position
+        document.body.appendChild(buttonsContainer);
+        
+        // Reset button states
+        const scoreDisplay = document.getElementById('score-display');
+        if (scoreDisplay) {
+            scoreDisplay.style.display = 'none';
+            scoreDisplay.style.opacity = '0';
+        }
+        refreshButton.style.display = 'none';
+        refreshButton.style.opacity = '0';
+        learnMoreButton.style.display = 'none';
+        learnMoreButton.style.opacity = '0';
+        
         transitionToNext(intermediateSection, mainContent);
     };
 
@@ -341,22 +401,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     img.style.boxShadow = '0 0 10px 5px gray';
                 }
                 img.style.transition = 'box-shadow 0.5s ease-in-out';
-            }, index * 500); // Delay each highlight by 500ms
+            }, index * 500);
         });
-  
+
         // Create or update the score display
         let scoreDisplay = document.getElementById('score-display');
         if (!scoreDisplay) {
             scoreDisplay = document.createElement('div');
             scoreDisplay.id = 'score-display';
-            scoreDisplay.style.display = 'block';
-            scoreDisplay.style.textAlign = 'center';
-            scoreDisplay.style.fontSize = '22px';
-            scoreDisplay.style.marginTop = '20px';
-            scoreDisplay.style.opacity = '0';
-            scoreDisplay.style.transition = 'opacity 0.5s ease-in-out';
-            buttonsContainer.appendChild(scoreDisplay);
         }
+        
+        // Reset score display styles
+        scoreDisplay.style.display = 'block';
+        scoreDisplay.style.textAlign = 'center';
+        scoreDisplay.style.fontSize = '22px';
+        scoreDisplay.style.marginTop = '20px';
+        scoreDisplay.style.opacity = '0';
+        scoreDisplay.style.transition = 'opacity 0.5s ease-in-out';
+        
+        // Make sure score display is in buttons container
+        if (!buttonsContainer.contains(scoreDisplay)) {
+            buttonsContainer.insertBefore(scoreDisplay, buttonsContainer.firstChild);
+        }
+
         setTimeout(() => {
             scoreDisplay.textContent = `Your score is ${score} out of ${maxSelections}`;
             scoreDisplay.style.opacity = '1';
