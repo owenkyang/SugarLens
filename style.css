@@ -423,7 +423,7 @@ hr {
 
 .graph-section-description {
     text-align: center;
-    font-size: 21px;  /* Reduced from 21px */
+    font-size: 19px;  /* Reduced from 21px */
     margin: 5px 0 20px 0;  /* Reduced top margin from 8px */
     color: #666;
 }
@@ -614,7 +614,7 @@ hr {
     width: 100%;
     height: 100vh;
     z-index: 1000;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: #ffffff;  /* Changed from gradient to white */
 }
 
 .intermediate-content {
@@ -674,7 +674,7 @@ hr {
 
 .example-graph-container {
     width: 45%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(240, 240, 240, 0.95);  /* Changed from rgba(255, 255, 255, 0.9) to a slightly darker shade */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
