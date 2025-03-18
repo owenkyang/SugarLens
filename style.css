@@ -618,19 +618,20 @@ hr {
 }
 
 .intermediate-content {
-    height: 100vh;
+    height: 90vh;  /* Reduced from 100vh */
+    padding-top: 0;  /* Remove top padding */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 0 20px;  /* Keep horizontal padding */
 }
 
 .intermediate-title {
     font-size: 3.5rem;
     color: #333;
-    margin-bottom: 2rem;  /* Reduced from 3rem */
+    margin-bottom: 1.5rem;  /* Further reduced from 2rem */
 }
 
 .instructions {
@@ -646,7 +647,7 @@ hr {
 }
 
 .lets-play-container {
-    margin-top: 2rem;  /* Reduced from 3rem */
+    margin-top: 1.5rem;  /* Further reduced from 2rem */
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
@@ -664,7 +665,7 @@ hr {
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto 1.5rem auto;  /* Reduced from 2rem */
+    margin: 0 auto 1rem auto;  /* Further reduced from 1.5rem */
 }
 
 .example-graph-container {
@@ -693,7 +694,7 @@ hr {
     font-size: 1.2rem;
     color: #333;
     max-width: 800px;
-    margin: 0 auto 1.5rem;  /* Reduced from 2rem */
+    margin: 0 auto 1rem;  /* Further reduced from 1.5rem */
     line-height: 1.6;
     text-align: center;
 }
