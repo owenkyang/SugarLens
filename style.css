@@ -443,14 +443,16 @@ hr {
 .graph-tooltip {
     position: absolute;
     text-align: center;
-    width: 80px;
-    height: 40px;
-    padding: 2px;
+    width: 120px; /* Increased width to fit content better */
+    height: 45px; /* Increased height to fit content better */
+    padding: 6px;
     font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #333;
     border-radius: 8px;
     pointer-events: none;
+    z-index: 2000; /* Increased z-index to appear above all content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .graph-section {
@@ -567,6 +569,17 @@ hr {
     animation: bounce 2s infinite;
 }
 
+.bouncing-arrow {
+    font-size: 2rem;
+    display: block;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+}
+
+.lets-begin-container, .lets-play-container {
+    cursor: pointer;
+}
+
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
         transform: translateY(0);
@@ -581,5 +594,116 @@ hr {
 
 .lets-begin-container:hover {
     opacity: 0.8;
+}
+
+.intro-content .description {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    margin: 20px auto;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+/* Intermediate Section Styles */
+#intermediate-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.intermediate-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.intermediate-title {
+    font-size: 3.5rem;
+    color: #333;
+    margin-bottom: 2rem;  /* Reduced from 3rem */
+}
+
+.instructions {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.instructions p {
+    font-size: 1.5rem;
+    color: #555;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.lets-play-container {
+    margin-top: 2rem;  /* Reduced from 3rem */
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+#lets-play {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.example-graphs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 1.5rem auto;  /* Reduced from 2rem */
+}
+
+.example-graph-container {
+    width: 45%;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.example-graph-container h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.example-graph-container p {
+    text-align: center;
+    margin-top: 1rem;
+    color: #555;
+    font-size: 1.2rem;
+}
+
+.intermediate-description {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;  /* Reduced from 2rem */
+    line-height: 1.6;
+    text-align: center;
+}
+
+.intermediate-description a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.intermediate-description a:hover {
+    text-decoration: underline;
 }
 

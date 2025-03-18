@@ -3,26 +3,65 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Intro screen functionality
     const introSection = document.getElementById('intro-section');
+    const intermediateSection = document.getElementById('intermediate-section');
     const mainContent = document.getElementById('main-content');
     const letsBegin = document.getElementById('lets-begin');
+    const letsPlay = document.getElementById('lets-play');
+    const beginArrow = document.getElementById('lets-begin-arrow');
+    const playArrow = document.getElementById('lets-play-arrow');
 
-    letsBegin.addEventListener('click', () => {
-        // Fade out intro section
-        introSection.style.transition = 'opacity 1s ease-out';
-        introSection.style.opacity = '0';
+    // Common transition function
+    const transitionToNext = (fromSection, toSection) => {
+        fromSection.style.transition = 'opacity 1s ease-out';
+        fromSection.style.opacity = '0';
         
-        // Show and fade in main content
-        mainContent.style.display = 'block';
+        toSection.style.display = 'block';
         setTimeout(() => {
-            mainContent.style.transition = 'opacity 1s ease-in';
-            mainContent.style.opacity = '1';
+            toSection.style.transition = 'opacity 1s ease-in';
+            toSection.style.opacity = '1';
         }, 100);
 
-        // Remove intro section after animation
         setTimeout(() => {
-            introSection.style.display = 'none';
+            fromSection.style.display = 'none';
         }, 1000);
-    });
+    };
+
+    // Handler for beginning transition
+    const handleBeginTransition = () => {
+        transitionToNext(introSection, intermediateSection);
+        // Create example graphs after transition
+        setTimeout(() => {
+            const salmonData = [
+                { Date: '2023-01-01T12:00:00', 'Glucose Value': 90 },
+                { Date: '2023-01-01T12:15:00', 'Glucose Value': 95 },
+                { Date: '2023-01-01T12:30:00', 'Glucose Value': 98 },
+                { Date: '2023-01-01T12:45:00', 'Glucose Value': 94 },
+                { Date: '2023-01-01T13:00:00', 'Glucose Value': 91 }
+            ];
+
+            const cerealData = [
+                { Date: '2023-01-01T12:00:00', 'Glucose Value': 90 },
+                { Date: '2023-01-01T12:15:00', 'Glucose Value': 120 },
+                { Date: '2023-01-01T12:30:00', 'Glucose Value': 145 },
+                { Date: '2023-01-01T12:45:00', 'Glucose Value': 130 },
+                { Date: '2023-01-01T13:00:00', 'Glucose Value': 105 }
+            ];
+
+            createLineGraph(salmonData, 'Salmon', document.getElementById('salmon-graph'), true);
+            createLineGraph(cerealData, 'Cereal', document.getElementById('cereal-graph'), false);
+        }, 500);
+    };
+
+    // Handler for play transition
+    const handlePlayTransition = () => {
+        transitionToNext(intermediateSection, mainContent);
+    };
+
+    // Add click handlers for both text and arrows
+    letsBegin.addEventListener('click', handleBeginTransition);
+    beginArrow.addEventListener('click', handleBeginTransition);
+    letsPlay.addEventListener('click', handlePlayTransition);
+    playArrow.addEventListener('click', handlePlayTransition);
 
     const foodImages = document.querySelectorAll('.image-container img:not(.plate-image)');
     const tooltip = document.createElement('div');
@@ -371,95 +410,95 @@ document.addEventListener('DOMContentLoaded', () => {
   
     createRefreshButton();
   
-    function createLineGraph(data, food, container) {
-        const margin = { top: 20, right: 20, bottom: 40, left: 50 }, // Adjusted margins for smaller graphs
-            width = 300 - margin.left - margin.right, // Smaller width
-            height = 250 - margin.top - margin.bottom; // Smaller height
-  
+    function createLineGraph(data, food, container, isGoodExample = null) {
+        const margin = { top: 20, right: 20, bottom: 40, left: 50 },
+            width = 300 - margin.left - margin.right,
+            height = 250 - margin.top - margin.bottom;
+
         const svg = d3.select(container)
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
-  
+
         const x = d3.scaleTime()
             .domain(d3.extent(data, d => new Date(d.Date)))
             .range([0, width]);
-  
+
         svg.append("g")
             .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x).ticks(2).tickFormat(d3.timeFormat("%H:%M")).tickValues([d3.min(data, d => new Date(d.Date)), d3.max(data, d => new Date(d.Date))]));
-  
-        const yMin = d3.min(data, d => +d['Glucose Value']);
-        const yMax = d3.max(data, d => +d['Glucose Value']);
-        const yMid = (yMin + yMax) / 2;
-  
+            .call(d3.axisBottom(x).ticks(2).tickFormat(d3.timeFormat("%H:%M"))
+                .tickValues([d3.min(data, d => new Date(d.Date)), d3.max(data, d => new Date(d.Date))]));
+
+        // Always use fixed y-axis range (70-170) with 5 ticks
         const y = d3.scaleLinear()
-            .domain([yMin - (yMid - yMin), yMax + (yMax - yMid)]) // Center the y-axis around the middle value
+            .domain([70, 170])
             .range([height, 0]);
-  
+
         svg.append("g")
-            .call(d3.axisLeft(y).ticks(2).tickValues([yMin, yMax]));
-  
+            .call(d3.axisLeft(y).ticks(5));
+
         const line = d3.line()
             .x(d => x(new Date(d.Date)))
             .y(d => y(+d['Glucose Value']));
-  
+
         const path = svg.append("path")
             .datum(data)
             .attr("fill", "none")
             .attr("stroke-width", 3) // Thinner line
             .attr("d", line);
-  
-        // Set line color based on food type
-        if (goodFoods.includes(food)) {
+
+        // Modify line color logic
+        if (isGoodExample !== null) {
+            path.attr("stroke", isGoodExample ? "green" : "red");
+        } else if (goodFoods.includes(food)) {
             path.attr("stroke", "green");
         } else if (badFoods.includes(food)) {
             path.attr("stroke", "red");
         } else {
             path.attr("stroke", "gray");
         }
-  
+
         svg.append("text")
             .attr("x", width / 2)
             .attr("y", 0) // Adjusted y position to ensure the title is fully visible
             .attr("text-anchor", "middle")
             .attr("class", "graph-title")
             .text(`${food.charAt(0).toUpperCase() + food.slice(1)}`);
-  
+
         // Display the minimum and maximum values on the y-axis
         svg.append("text")
             .attr("x", -margin.left)
-            .attr("y", y(yMin))
+            .attr("y", y(d3.min(data, d => +d['Glucose Value'])))
             .attr("dy", "-0.5em")
             .attr("text-anchor", "end")
             .style("font-size", "10px")
-            .text(yMin);
-  
+            .text(d3.min(data, d => +d['Glucose Value']));
+
         svg.append("text")
             .attr("x", -margin.left)
-            .attr("y", y(yMax))
+            .attr("y", y(d3.max(data, d => +d['Glucose Value'])))
             .attr("dy", "-0.5em")
             .attr("text-anchor", "end")
             .style("font-size", "10px")
-            .text(yMax);
-  
+            .text(d3.max(data, d => +d['Glucose Value']));
+
         // Display the earliest and latest times on the x-axis
         svg.append("text")
             .attr("x", x(d3.min(data, d => new Date(d.Date))))
             .attr("y", height + margin.bottom / 2)
             .attr("dy", "1em")
             .attr("text-anchor", "middle")
-            .style("font-size", "10px")
-  
+            .style("font-size", "10px");
+
         svg.append("text")
             .attr("x", x(d3.max(data, d => new Date(d.Date))))
             .attr("y", height + margin.bottom / 2)
             .attr("dy", "1em")
             .attr("text-anchor", "middle")
-            .style("font-size", "10px")
-  
+            .style("font-size", "10px");
+
         // Add y-axis label
         svg.append("text")
             .attr("transform", "rotate(-90)")
@@ -469,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .style("text-anchor", "middle")
             .style("font-size", "12px")
             .text("Glucose Concentration (mg/dL)");
-  
+
         // Add x-axis label
         svg.append("text")
             .attr("x", width / 2)
@@ -477,19 +516,20 @@ document.addEventListener('DOMContentLoaded', () => {
             .style("text-anchor", "middle")
             .style("font-size", "12px")
             .text("Timestamp (24 hr)");
-  
-        // Add tooltip
-        const graphTooltip = d3.select("body").append("div")
+
+        // Add a dedicated tooltip for this graph
+        const thisGraphTooltip = d3.select("body").append("div")
             .attr("class", "graph-tooltip")
             .style("opacity", 0);
-  
+
         const focus = svg.append("g")
             .style("display", "none");
-  
+
         focus.append("circle")
             .attr("r", 5)
-            .attr("fill", "black");
-  
+            .attr("fill", isGoodExample !== null ? "black" : "black");
+
+        // Add mouseover interactions
         svg.append("rect")
             .attr("width", width)
             .attr("height", height)
@@ -497,9 +537,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .style("pointer-events", "all")
             .on("mouseover", () => {
                 focus.style("display", null);
-                graphTooltip.transition()
+                thisGraphTooltip.transition()
                     .duration(200)
-                    .style("opacity", .9);
+                    .style("opacity", 0.9);
             })
             .on("mousemove", (event) => {
                 const mouse = d3.pointer(event);
@@ -508,13 +548,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     return (Math.abs(new Date(curr.Date) - xDate) < Math.abs(new Date(prev.Date) - xDate) ? curr : prev);
                 });
                 focus.attr("transform", `translate(${x(new Date(closestData.Date))},${y(+closestData['Glucose Value'])})`);
-                graphTooltip.html(`Time: ${d3.timeFormat("%H:%M")(new Date(closestData.Date))}<br>Glucose: ${closestData['Glucose Value']}`)
+                thisGraphTooltip.html(`Time: ${d3.timeFormat("%H:%M")(new Date(closestData.Date))}<br>Glucose: ${closestData['Glucose Value']}`)
                     .style("left", (event.pageX + 5) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
             .on("mouseout", () => {
                 focus.style("display", "none");
-                graphTooltip.transition()
+                thisGraphTooltip.transition()
                     .duration(500)
                     .style("opacity", 0);
             });
@@ -533,4 +573,4 @@ document.addEventListener('DOMContentLoaded', () => {
             .ease(d3.easeLinear) // Linear animation
             .attr("stroke-dashoffset", 0); // Animate to fully drawn line
     }
-  });
+});
